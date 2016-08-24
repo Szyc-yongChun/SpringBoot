@@ -1,0 +1,59 @@
+在spring boot中，只需要将数据库连接信息配置好，spring boot会自动加载配置信息，生产数据源并自动注入到
+jdbctemplate模板中，可直接获取jdbctemplate直接使用。
+
+#配置单个数据源--标准
+spring.datasource.url=jdbc:mysql://localhost:3306/timebusker
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+多个数据源的配置流程：
+
+1）、配置自定义的数据库连接信息
+     
+     spring.datasource.primary.url=
+     spring.datasource.primary.username=
+     spring.datasource.primary.password=
+     spring.datasource.primary.driver-class-name=
+
+     spring.datasource.secondary.url=
+     spring.datasource.secondary.username=
+     spring.datasource.secondary.password=
+     spring.datasource.secondary.driver-class-name=
+
+2）、使用@Configuration注释类来生产多个数据源
+    
+    @Bean(name = "primaryDataSource")
+    @Qualifier("primaryDataSource")
+    @ConfigurationProperties(prefix="spring.datasource.primary")
+    public DataSource primaryDataSource() {
+        return (DataSource) DataSourceBuilder.create().build();
+    }
+
+    @Bean(name = "secondaryDataSource")
+    @Qualifier("secondaryDataSource")
+    @Primary
+    @ConfigurationProperties(prefix="spring.datasource.secondary")
+    public DataSource secondaryDataSource() {
+        return (DataSource) DataSourceBuilder.create().build();
+    }
+    
+3）、把生产出来的数据源注入到jdbctemplate中
+    
+    @Bean(name = "primaryJdbcTemplate")
+    public JdbcTemplate primaryJdbcTemplate(
+            @Qualifier("primaryDataSource") DataSource dataSource) {
+        return new JdbcTemplate((javax.sql.DataSource) dataSource);
+    }
+
+    @Bean(name = "secondaryJdbcTemplate")
+    public JdbcTemplate secondaryJdbcTemplate(
+            @Qualifier("secondaryDataSource") DataSource dataSource) {
+        return new JdbcTemplate((javax.sql.DataSource) dataSource);
+    }
+    
+ 4）、当使用JdbcTemplate模板是，指定所需使用的对象便操作到不同的数据库
+    
+    @Autowired
+	@Qualifier("primaryJdbcTemplate")
+	private JdbcTemplate PjdbcTemplate;
