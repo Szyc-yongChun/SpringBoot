@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 异步任务
- * 
+ * 只需要在所需实现异步的方法上加上@Async注解，
+ * 并通过Future<T>来接受异步方法的处理结果
  * @author Administrator
  *
  */

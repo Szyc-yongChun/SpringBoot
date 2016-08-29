@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
+//需要在Spring Boot的主程序中配置@EnableAsync，启用@Async注解
 @EnableAsync
 public class Application {
 	/**
