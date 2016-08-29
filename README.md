@@ -50,30 +50,87 @@
 			             通过解析方法名创建查询
 						 @Query
 			Spring-data-jpa实现了面向接口的编写方式，只需要通过编写一个继承自JpaRepository的接口就能完成数据访问
-			spring.jpa.properties.hibernate.hbm2ddl.auto=XXX 是hibernate的配置属性，其主要作用是：自动创建、更新、验证数据库表结构
+			spring.jpa.properties.hibernate.hbm2ddl.auto=XXX 是hibernate的配置属性，
+			            其主要作用是：自动创建、更新、验证数据库表结构
+			
+			##################################################################################
+                        配置多数据源的总结
+            1）、需要在配置文件中配置多个数据库连接信息
+
+            2）、通过@Configuration注释类加载数据库信息并生成对应的数据源，使用@Bean注释把数据源注册到Ioc容器中
+
+            3）、在spring-data-jpa中，暂时不清楚具体的框架流程
+     
+                 注：
+                 A、多数据源配置中，实体和Repositry需要按数据源划分开，
+				      否则如果@Primary注解将使用默认数据完成数据库操作
 
 
 			
-第六个项目：SpringBoot-Swagger2  Swagger2可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档
+第六个项目：SpringBoot-Redis  Spring Boot中使用Redis数据库
             
-			构建RESTful API与单元测试
-			开发Web应用  
+			除了String类型，实战中我们还经常会在Redis中存储对象，
+			这时候我们就会想是否可以使用类似RedisTemplate<String, User>来初始化并进行操作。
+			但是Spring Boot并不支持直接使用，需要我们自己实现RedisSerializer<T>接口来对传入对象进行序列化和反序列化，
+			下面我们通过一个实例来完成对象的读写操作。
 
 
 
 			
-第七个项目：SpringBoot-Swagger2  Swagger2可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档
+第七个项目：SpringBoot-MongoDB  Spring Boot中使用MongoDB数据库
             
-			构建RESTful API与单元测试
-			开发Web应用  
+			MongoDB是一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库之间的产品，
+			其主要目标是在键/值存储方式（提供了高性能和高度伸缩性）和传统的RDBMS系统（具有丰富的功能）
+			之间架起一座桥梁，它集两者的优势于一身。
+            MongoDB支持的数据结构非常松散，是类似json的bson格式，因此可以存储比较复杂的数据类型，
+			也因为他的存储格式也使得它所存储的数据在Nodejs程序应用中使用非常流畅。
+			
+           既然称为NoSQL数据库，Mongo的查询语言非常强大，其语法有点类似于面向对象的查询语言，
+          几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。
+          但是，MongoDB也不是万能的，同MySQL等关系型数据库相比，它们在针对不同的数据类型和事务要求上都存在自己独特的优势。
+          在数据存储的选择中，坚持多样化原则，选择更好更经济的方式，而不是自上而下的统一化。
+          
+		  较常见的，我们可以直接用MongoDB来存储键值对类型的数据，如：验证码、Session等；由于MongoDB的横向扩展能力，
+		  也可以用来存储数据规模会在未来变的非常巨大的数据，如：日志、评论等；由于MongoDB存储数据的弱类型，
+		  也可以用来存储一些多变json数据，如：与外系统交互时经常变化的JSON报文。而对于一些对数据有复杂的高事务性要求的操作，
+		  如：账户交易等就不适合使用MongoDB来存储。
 
 
 
 			
-第八个项目：SpringBoot-Swagger2  Swagger2可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档
+第八个项目：SpringBoot-MyBatis Spring Boot整合MyBatis、Spring Boot中使用MyBatis注解配置详解
             
-			构建RESTful API与单元测试
-			开发Web应用  			
-			
+			MyBatis注解传参的方式
+                     使用@Param 
+					 使用Map
+                     使用对象					 
 
-              
+					 
+					 
+第九个项目：SpringBoot-Transcation Spring Boot中的事务管理
+            
+			 在Spring Boot中，当我们使用了spring-boot-starter-jdbc或spring-boot-starter-data-jpa依赖的时候，
+			 框架会自动默认分别注入DataSourceTransactionManager或JpaTransactionManager。
+			 所以我们不需要任何额外配置就可以用@Transactional注解进行事务的使用。					 
+
+
+第十个项目：SpringBoot-Scheduled Spring Boot中使用@Scheduled创建定时任务
+            
+			  ● 在Spring Boot的主类中加入@EnableScheduling注解，启用定时任务的配置
+			  
+              @Scheduled详解          
+                  ● @Scheduled(fixedRate = 5000) ：上一次开始执行时间点之后5秒再执行
+                  ● @Scheduled(fixedDelay = 5000) ：上一次执行完毕时间点之后5秒再执行
+                  ● @Scheduled(initialDelay=1000, fixedRate=5000) ：第一次延迟1秒后执行，之后按fixedRate的规则每5秒执行一次
+                  ● @Scheduled(cron="*/5 * * * * *") ：通过cron表达式定义规则			  
+
+
+第十一个项目：SpringBoot-Async Spring Boot中使用@Async实现异步调用
+            
+			同步调用 指程序按照定义顺序依次执行，每一行程序都必须等待上一行程序执行完成之后才能执行；
+			异步调用 指程序在顺序执行时，不等待异步调用的语句返回结果就执行后面的程序。		
+            
+            异步调用
+               需要在Spring Boot的主程序中配置@EnableAsync让@Async注解能够生效
+                 				
+					 
