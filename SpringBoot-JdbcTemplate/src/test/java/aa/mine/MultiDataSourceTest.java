@@ -10,9 +10,6 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import aa.mine.service.userService;
-import aa.mine.service.Impl.userServiceImpl;
-
 /**
  * 没有使用
  * @author Administrator

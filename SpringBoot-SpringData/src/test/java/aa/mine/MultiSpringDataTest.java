@@ -1,17 +1,11 @@
 package aa.mine;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.alibaba.fastjson.JSON;
-
 import aa.mine.Entity.Message;
 import aa.mine.Entity.UserEntity;
 import aa.mine.Repository.MessageRepository;
@@ -21,7 +15,7 @@ import aa.mine.Repository.UserRepository;
 @SpringApplicationConfiguration(Application.class)
 public class MultiSpringDataTest {
 	
-	private static Logger logger = Logger.getLogger(MultiSpringDataTest.class);
+	//private static Logger logger = Logger.getLogger(MultiSpringDataTest.class);
 		
 	@Autowired
 	private UserRepository userRepository;

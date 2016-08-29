@@ -47,6 +47,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 	UserEntity findByNameAndAge(String name, Integer age);
 
+	/**
+	 * 必须使用@param 绑定参数
+	 */
 	@Query("from UserEntity u where u.name=:name")
 	UserEntity findUser(String name);
 
