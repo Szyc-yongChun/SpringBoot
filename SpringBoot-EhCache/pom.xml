@@ -4,10 +4,10 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>aa.mine</groupId>
-	<artifactId>SpringBoot-Transcation</artifactId>
+	<artifactId>SpringBoot-EhCache</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SpringBoot-Transcation Maven Webapp</name>
+	<name>SpringBoot-EhCache Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -42,6 +42,7 @@
 		</dependency>
 		<!-- END -->
 
+		<!-- 添加Spring-Data-JPA的依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -57,14 +58,27 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.16</version>
 		</dependency>
-		
+
+		<!-- 引入Ehcache 的支持和依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
-		<finalName>SpringBoot-Transcation</finalName>
+		<finalName>SpringBoot-EhCache</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

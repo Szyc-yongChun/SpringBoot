@@ -4,11 +4,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>aa.mine</groupId>
-	<artifactId>SpringBoot-Transcation</artifactId>
+	<artifactId>SpringBoot-RedisLump</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SpringBoot-Transcation Maven Webapp</name>
+	<name>SpringBoot-RedisLump Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<description>Redis集中缓存</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,9 +43,15 @@
 		</dependency>
 		<!-- END -->
 
+		<!-- 添加Redis依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
 		<dependency>
@@ -53,18 +60,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.16</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 	</dependencies>
+
 	<build>
-		<finalName>SpringBoot-Transcation</finalName>
+		<finalName>SpringBoot-RedisLump</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

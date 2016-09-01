@@ -178,3 +178,16 @@
                         ○ 通过formLogin()定义当需要用户登录时候，转到的登录页面。
                         ● configureGlobal(AuthenticationManagerBuilder auth)方法，在内存中创建了一个用户，该用户的名称为user，
 						密码为password，用户角色为USER。
+						
+			   继承WebMvcConfigurerAdapter可以实现配置MVC的很多配置，此处仅配置了拦截器案例。
+
+
+			   
+第十六个项目：SpringBoot-JavaMailSender  Spring Boot中使用JavaMailSender发送邮件
+                
+				Spring提供了非常好用的JavaMailSender接口实现邮件发送。在Spring Boot的Starter模块中也为此提供了自动化配置。
+				       简单邮件发送
+					   发送附件
+					   嵌入静态资源
+					   模板邮件
+					   

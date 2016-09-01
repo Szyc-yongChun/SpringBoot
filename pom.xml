@@ -23,5 +23,8 @@
     <module>SpringBoot-AOP</module>
     <module>SpringBoot-LogtoMongoDB</module>
     <module>SpringBoot-SpringSecurity</module>
+    <module>SpringBoot-JavaMailSender</module>
+    <module>SpringBoot-EhCache</module>
+    <module>SpringBoot-RedisLump</module>
   </modules>
 </project>
