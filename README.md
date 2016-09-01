@@ -1,12 +1,13 @@
-                .   ____          _            __ _ _
-               /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-              ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-               \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-                '  |____| .__|_| |_|_| |_\__, | / / / /
-               =========|_|==============|___/=/_/_/_/
-               :: Spring Boot ::        (v1.3.2.RELEASE)
+                            .   ____          _            __ _ _
+                           /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+                          ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+                           \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+                            '  |____| .__|_| |_|_| |_\__, | / / / /
+                           =========|_|==============|___/=/_/_/_/
+                           :: Spring Boot ::        (v1.3.2.RELEASE)
 			   
-                       Spring Boot Learning
+                                   Spring Boot Learning
+								   
 					   
 第一个项目：SpringBoot-Hello spring boot的入门程序
             
@@ -131,27 +132,25 @@
 			同步调用 指程序按照定义顺序依次执行，每一行程序都必须等待上一行程序执行完成之后才能执行；
 			异步调用 指程序在顺序执行时，不等待异步调用的语句返回结果就执行后面的程序。		
             
-            异步调用
-               需要在Spring Boot的主程序中配置@EnableAsync让@Async注解能够生效
+            异步调用 需要在Spring Boot的主程序中配置@EnableAsync让@Async注解能够生效
                  				
                
 第十二个项目：SpringBoot-Logger Spring Boot日志管理
 
 				Spring Boot日志管理
-				  Spring Boot在所有内部日志中使用   Commons Logging，但是默认配置也提供了对常用日志的支持，
-				  如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。
+				         Spring Boot在所有内部日志中使用   Commons Logging，但是默认配置也提供了对常用日志的支持，
+				         如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。
 				Spring boot中使用log4j记录日志
-				  Spring Boot默认的日志框架Logback，在引入log4j之前，需要先排除该包的依赖
+				        Spring Boot默认的日志框架Logback，在引入log4j之前，需要先排除该包的依赖
 				Spring Boot中对log4j进行多环境不同日志级别的控制
-                    ● 创建多环境配置文件
-                      ○ application-dev.properties：开发环境
-                      ○ application-test.properties：测试环境
-                      ○ application-prod.properties：生产环境	
+                          ● 创建多环境配置文件
+                            ○ application-dev.properties：开发环境
+                            ○ application-test.properties：测试环境
+                            ○ application-prod.properties：生产环境	
 
 第十三个项目：SpringBoot-AOP  Spring Boot中使用AOP统一处理Web请求日志
 
-                AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期动态代理
-				实现程序功能的统一维护的一种技术。
+                AOP为Aspect Oriented Programming的缩写，面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。
 				AOP是Spring框架中的一个重要内容，它通过对既有程序定义一个切入点，然后在其前后切入不同的执行内容，
 				比如常见的有：打开数据库连接/关闭数据库连接、打开事务/关闭事务、记录日志等。
 				
