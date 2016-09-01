@@ -134,4 +134,48 @@
             异步调用
                需要在Spring Boot的主程序中配置@EnableAsync让@Async注解能够生效
                  				
-					 
+               
+第十二个项目：SpringBoot-Logger Spring Boot日志管理
+
+				Spring Boot日志管理
+				  Spring Boot在所有内部日志中使用   Commons Logging，但是默认配置也提供了对常用日志的支持，
+				  如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。
+				Spring boot中使用log4j记录日志
+				  Spring Boot默认的日志框架Logback，在引入log4j之前，需要先排除该包的依赖
+				Spring Boot中对log4j进行多环境不同日志级别的控制
+                    ● 创建多环境配置文件
+                      ○ application-dev.properties：开发环境
+                      ○ application-test.properties：测试环境
+                      ○ application-prod.properties：生产环境	
+
+第十三个项目：SpringBoot-AOP  Spring Boot中使用AOP统一处理Web请求日志
+
+                AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期动态代理
+				实现程序功能的统一维护的一种技术。
+				AOP是Spring框架中的一个重要内容，它通过对既有程序定义一个切入点，然后在其前后切入不同的执行内容，
+				比如常见的有：打开数据库连接/关闭数据库连接、打开事务/关闭事务、记录日志等。
+				
+				基于AOP不会破坏原来程序逻辑，因此它可以很好的对业务逻辑的各个部分进行隔离，
+				从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
+
+				
+第十四个项目：SpringBoot-LogtoMongoDB Spring Boot中使用log4j实现http请求日志入mongodb
+
+                思路：log4j提供的输出器实现自Appender接口，要自定义appender输出到MongoDB，只需要继承AppenderSkeleton类，
+				      并实现几个方法即可完成。
+				该项目主要是提供一个思路去实现自定义日志的输出和管理。我们可以通过jdbc实现日志记录到mongodb，
+				也可以通过spring-data-mongo来记录到mongodb，当然我们也可以输出到其他数据库，或者输出到消息队列等待其他后续处理等。
+                同时对于日志记录到mongodb，也可以直接使用log4mongo（github）实现更为方便快捷。
+				
+第十五个项目：SpringBoot-SpringSecurity Spring Boot中使用Spring Security进行安全控制
+               
+			   Spring Security配置
+			        创建Spring Security的配置类WebSecurityConfig
+					    ● 通过@EnableWebSecurity注解开启Spring Security的功能
+					    ● 继承WebSecurityConfigurerAdapter，并重写它的方法来设置一些web安全的细节
+						● configure(HttpSecurity http)方法
+                        ○ 通过authorizeRequests()定义哪些URL需要被保护、哪些不需要被保护。例如以上代码指定了/和/home不需要
+						任何认证就可以访问，其他的路径都必须通过身份验证。
+                        ○ 通过formLogin()定义当需要用户登录时候，转到的登录页面。
+                        ● configureGlobal(AuthenticationManagerBuilder auth)方法，在内存中创建了一个用户，该用户的名称为user，
+						密码为password，用户角色为USER。

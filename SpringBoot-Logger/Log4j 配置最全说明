@@ -1,0 +1,458 @@
+1.   log4j 的配置文件 
+Log4j 支持两种配置文件格式，一种是 XML 格式的文件，一种是 Java 特性文件 lg4j.properties （键 = 值）。 
+
+1.1. log4j configuration scripts in properties format 
+lg4j.properties 文件作为作为常用的配置文件的方法如下： 
+
+Ø         配置根 Logger 
+Logger 负责处理日志记录的大部分操作。 
+其语法为： 
+log4j.rootLogger = [ level ] , appenderName, appenderName, … 
+    其中， level 是日志记录的优先级，分为 OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 ALL 或者自定义的级别。 Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR 、 WARN 、 INFO 、 DEBUG 。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了 INFO 级别，只有等于及高于这个级别的才进行处理，则应用程序中所有 DEBUG 级别的日志信息将不被打印出来。 ALL: 打印所有的日志， OFF ：关闭所有的日志输出。 appenderName 就是指定日志信息输出到哪个地方。可同时指定多个输出目的地。 
+
+Ø         Appender 
+
+配置日志信息输出目的地 Appender 负责控制日志记录操作的输出。 
+其语法为： 
+log4j.appender.appenderName = fully.qualified.name.of.appender.class 
+log4j.appender.appenderName.option1 = value1 
+log4j.appender.appenderName.optionN = valueN 
+
+其中， Log4j 提供的 appender 有以下几种： 
+org.apache.log4j.ConsoleAppender （控制台）， 
+org.apache.log4j.FileAppender （文件）， 
+org.apache.log4j.DailyRollingFileAppender （每天产生一个日志文件）， 
+org.apache.log4j.RollingFileAppender （文件大小到达指定尺寸的时候产生一个新的文件），可通过 log4j.appender.R.MaxFileSize=100KB 设置文件大小，还可通过 log4j.appender.R.MaxBackupIndex=1 设置为保存一个备份文件。 
+org.apache.log4j.WriterAppender （将日志信息以流格式发送到任意指定的地方） 
+例： 
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender 
+定义一个名为 stdout 的输出目的地， ConsoleAppender 为控制台。 
+
+Ø         Layout 
+
+其中， Log4j 提供的 layout 有以下几种： 
+org.apache.log4j.HTMLLayout （以 HTML 表格形式布局）， 
+org.apache.log4j.PatternLayout （可以灵活地指定布局模式）， 
+org.apache.log4j.SimpleLayout （包含日志信息的级别和信息字符串）， 
+org.apache.log4j.TTCCLayout （包含日志产生的时间、线程、类别等等信息） 
+
+
+
+Ø         格式化日志信息 
+Log4J 采用类似 C 语言中的 printf 函数的打印格式格式化日志信息，打印参数如下： 
+%m 输出代码中指定的消息 
+%p 输出优先级，即 DEBUG ， INFO ， WARN ， ERROR ， FATAL 
+%r 输出自应用启动到输出该 log 信息耗费的毫秒数 
+%c 输出所属的类目，通常就是所在类的全名 
+%t 输出产生该日志事件的线程名 
+%n 输出一个回车换行符， Windows 平台为 “rn” ， Unix 平台为 “n” 
+%d 输出日志时间点的日期或时间，默认格式为 ISO8601 ，也可以在其后指定格式，比如： %d{yyyy MMM dd HH:mm:ss,SSS} ，输出类似： 2002 年 10 月 18 日 22 ： 10 ： 28 ， 921 
+%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。 
+
+
+
+log4j.propertie 示例文件： 
+
+log4j.rootCategory=INFO, stdout,file 
+
+###. 定义名为 stdout 的输出端的类型 
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender 
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout 
+log4j.appender.stdout.layout.ConversionPattern=[QC] %p [%t] %C.%M(%L) | %m%n 
+
+
+
+###. 定义名为 file 的输出端的类型为每天产生一个日志文件。 
+log4j.appender.file =org.apache.log4j.DailyRollingFileAppender 
+log4j.appender.file.File=log.txt 
+log4j.appender.file.layout=org.apache.log4j.PatternLayout 
+log4j.appender.file.layout.ConversionPattern=%d-[TS] %p %t %c - %m%n 
+
+
+
+###. 指定 com.neusoft 包下的所有类的等级为 DEBUG 。可以把 com.neusoft 改为自己项目所用的包名。 
+log4j.logger.com.neusoft=DEBUG 
+
+###. 如果项目中没有配置 EHCache ，则配置以下两句为 ERROR 。 
+log4j.logger.com.opensymphony.oscache=ERROR 
+log4j.logger.net.sf.navigator=ERROR 
+
+### struts 配置 
+log4j.logger.org.apache.commons=ERROR 
+
+log4j.logger.org.apache.struts=WARN 
+
+### displaytag 配置 
+log4j.logger.org.displaytag=ERROR 
+
+### .spring 配置 
+log4j.logger.org.springframework=DEBUG 
+
+### . ibatis 配置 
+log4j.logger.com.ibatis.db=WARN 
+### . hibernate 配置 
+
+log4j.logger.org.hibernate=DEBUG 
+
+
+
+log4j.logger.org.apache.velocity=FATAL 
+log4j.logger.com.canoo.webtest=WARN 
+
+
+
+1.2. log4j configuration scripts in XML format 
+<?xml version="1.0" encoding="GB2312" ?> 
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd"> 
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"> 
+
+<appender name="org.zblog.all" class="org.apache.log4j.RollingFileAppender"> 
+
+<!-- 设置通道 ID:org.zblog.all 和输出方式： org.apache.log4j.RollingFileAppender --> 
+
+<param name="File" value="all.output.log" /> 
+
+<!-- 设置 File 参数：日志输出文件名 --> 
+
+<param name="Append" value="false" /> 
+
+<!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 --> 
+
+   <param name="MaxBackupIndex" value="10" /> 
+
+   <layout class="org.apache.log4j.PatternLayout"> 
+
+       <param name="ConversionPattern" value="%p (%c:%L)- %m%n" /> 
+
+<!-- 设置输出文件项目和格式 --> 
+
+   </layout> 
+
+</appender> 
+
+<appender name="org.zblog.zcw" class="org.apache.log4j.RollingFileAppender"> 
+
+   <param name="File" value="output.log" /> 
+
+   <param name="Append" value="true" /> 
+
+   <param name="MaxFileSize" value="10240" /> 
+
+<!-- 设置文件大小 --> 
+
+   <param name="MaxBackupIndex" value="10" /> 
+
+   <layout class="org.apache.log4j.PatternLayout"> 
+
+   <param name="ConversionPattern" value="%p (%c:%L)- %m%n" /> 
+
+   </layout> 
+
+</appender> 
+
+<logger name="zcw.log"> 
+
+<!-- 设置域名限制，即 zcw.log 域及以下的日志均输出到下面对应的通道中 --> 
+
+   <level value="debug" /> 
+
+<!-- 设置级别 --> 
+
+   <appender-ref ref="org.zblog.zcw" /> 
+
+<!-- 与前面的通道 id 相对应 --> 
+
+</logger> 
+
+<root> 
+
+<!-- 设置接收所有输出的通道 --> 
+
+   <appender-ref ref="org.zblog.all" /> 
+
+<!-- 与前面的通道 id 相对应 --> 
+
+</root> 
+
+</log4j:configuration> 
+
+
+
+2.   log4j in java 
+2.1. commongs-logging+Log4j 
+Ø         导入所有需的 commongs-logging 类： 
+import org.apache.commons.logging.Log; 
+import org.apache.commons.logging.LogFactory; 
+
+
+
+Ø         获取日志记录器 
+
+在自己的类中定义一个 org.apache.commons.logging.Log 类的私有静态类成员： 
+private final Log log = LogFactory.getLog(getClass()); 
+LogFactory.getLog() 方法的参数使用的是当前类的 class 。 
+
+
+
+Ø         输出日志信息 
+
+使用 org.apache.commons.logging.Log 类的成员方法输出日志信息： 
+
+
+if (log.isDebugEnabled()) { 
+
+   log.debug("debug…"); 
+
+} 
+if (log.isInfoEnabled()){ 
+   log.info("Info…"); 
+} 
+if (log.isWarnEnabled()){ 
+   log.warn("warn …"); 
+} 
+if (log.isErrorEnabled()){ 
+   log.error("error …"); 
+
+} 
+if (log.isFatalEnabled()){ 
+   log.fatal("fatal …") 
+} 
+
+2.2. 单独使用 Log4j 
+Ø         获取日志记录器 
+
+得到记录器使用 Log4j ，这个记录器将负责控制日志信息。其语法为： 
+
+public static Logger getLogger( String name) 
+
+通过指定的名字获得记录器，如果必要的话，则为这个名字创建一个新的记录器。 Name 一般取本类的名字，比如： 
+
+static Logger logger = Logger.getLogger (Test.class.getName () ) 
+
+
+
+Ø         读取配置文件 
+
+当获得了日志记录器之后，第二步将配置 Log4j 环境，其语法为： 
+
+BasicConfigurator.configure () ： 自动快速地使用缺省 Log4j 环境。 
+
+PropertyConfigurator.configure(String configFilename) ：读取使用 Java 的特性文件编写的配置文件。 
+
+例： PropertyConfigurator.configure(".\\src\\log4j.properties"), 若将 log4j.properties 放在工程根目录下也可不写此句，程序会自动找到配置文件。
+
+DOMConfigurator.configure ( String filename ) ：读取 XML 形式的配置文件。 
+
+
+
+Ø         输出日志信息 
+
+当上两个必要步骤执行完毕，就可轻松地使用不同优先级别的日志记录语句插入到您想记录日志的任何地方，其语法如下： 
+
+Logger.debug ( Object message ) ; 
+
+Logger.info ( Object message ) ; 
+
+Logger.warn ( Object message ) ; 
+
+Logger.error ( Object message ) ; 
+
+
+
+log4j 范例程序 
+
+下面将使用一个最简单的范例程序来进一步说明 log4j 的使用方法。程序代码如下： 
+
+
+
+import org.apache.log4j.*; 
+
+import org.apache.log4j.PropertyConfigurator; 
+import org.apache.log4j.xml.DOMConfigurator; 
+
+public class LogTest { 
+
+static Logger logger = Logger.getLogger(LogTest.class.getName()); 
+
+public static void main(String[] args) { 
+
+PropertyConfigurator.configure ( “.\\src\log4j.properties”) ； 
+
+//DOMConfigurator.configure(".\\src\log4j.xml");// 加载 .xml 文件 
+logger.debug("Debug ..."); 
+
+logger.info("Info ..."); 
+
+logger.warn("Warn ..."); 
+
+logger.error("Error ..."); 
+
+} 
+
+} 
+
+3.   log4j in database 
+3.1. 数据库配置 
+Ø         导入所需的驱动包 
+
+无论使用哪种数据库都需要将驱动包导入服务中。 
+
+Ø         创建所需的表 
+
+首先要保证你的数据库中有 log 表，并且保正字段的长度，否则写入日志时操作会失败 
+
+数据字典说明： 
+
+CREATE TABLE LOG ( 
+
+        ID                 INTEGER NOT NULL PRIMARY KEY, 
+
+        LOGDATE            DATE, 
+
+        LOGTIME            TIME, 
+
+        LOGTHREAD          VARCHAR(50), 
+
+        LOGLEVEL           VARCHAR(50), 
+
+        LOGCLASS           VARCHAR(50), 
+
+        LOGLOGGER          VARCHAR(200), 
+
+        LOGMESSAGE         VARCHAR(2000) 
+
+) 
+
+GO 
+
+3.2. log4j 配置文件 
+## 配置数据库联接 
+
+log4j.appender.DATABASE=org.apache.log4j.jdbc.JDBCAppender 
+
+log4j.appender.DATABASE.URL=jdbc:db2://127.0.0.1:50000/pbdb 
+
+log4j.appender.DATABASE.driver=com.ibm.db2.jcc.DB2Driver 
+
+log4j.appender.DATABASE.user=erpt1104 
+
+log4j.appender.DATABASE.password=erpt1104 
+
+log4j.appender.DATABASE.sql = INSERT INTO log (logDATE,logTIME,LOGThread,loglevel,logClass,logLogger,logMessage) values ('%d{yyyy-MM-dd}','%d{HH:mm:ss}','%t', '%p', '%c', '%l', '%m') 
+
+log4j.appender.DATABASE.layout=org.apache.log4j.PatternLayout log4j.appender.DATABASE.layout.ConversionPattern = %d{yyyy MM dd HH:mm:ss,SSS} %-5p %t %c %m 
+
+
+
+说明： 
+
+%d 输出日志时间点的日期或时间，默认格式为 ISO8601 ，也可以在其后指定格式，比如： %d{yyyy-MM-dd HH:mm:ss} ，输出类似： 2007-3-29 17:49:27 ，刚好适合插入 SQLServer ； 
+
+%t 产生该日志事件的线程名； 
+
+%p 日志的 log_level ，如 DEBUG 、 WARN 或者 INFO ； 
+
+%c 输出所属的类目，通常就是所在类的全名，如“ iNotes.Default ”； 
+
+%m 日志的内容； 
+
+%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。如 Test.main(Test.java:33) ； 
+
+%n 输出一个回车换行符， Windows 平台为“ \r\n ”， Unix 平台为“ \n ” 
+
+3.3. java 中调用 
+import sun.jdbc.odbc.*; 
+
+import java.sql.*; 
+
+
+
+import org.apache.log4j.Category; 
+
+import org.apache.log4j.Level; 
+
+import org.apache.log4j.Logger; 
+
+import org.apache.log4j.PropertyConfigurator; 
+
+import org.apache.log4j.jdbc.*; 
+
+
+
+static Logger logger = Logger.getLogger(Test.class.getName ()); 
+
+PropertyConfigurator.configure ( "log.properties" ) ; 
+
+logger.info ( "test" ); 
+
+
+
+运行项目，你就会看到执行了 sql 语句，数据库中便插入相关数据，如需对日志进行分析整理，这就不是 log4j 的事情了。 
+
+
+
+4.   最后说明： 
+Doc 文档可以从其网站上下载： 
+
+http://logging.apache.org/log4j/docs/api/index.html 
+
+http://logging.apache.org/log4j/docs/documentation.html 
+
+  
+关于 eclipse 的 log4j的插件log4e  可以去他的官方网站上下载：http://log4e.jayefem.de/index.php/Download 
+
+
+
+
+1. log4j 配置文件解读 
+log4j 支持两种配置方式 xml和properties 
+log4j 三个主要组件 Loggers Appenders Layouts 对应日志类别、日志的输出、日志输出格式 
+
+Logger: 
+debug info warn error fatal五个级别 
+example: 
+root4j.rootLogger=info 
+
+Appender: 
+org.apache.log4j.ConsoleAppender  org.apache.log4j.FileAppender  org.apache.log4j.DailyRollingFileAppender 
+org.apache.log4j.RollingFileAppender  org.apache.log4j.WriteAppender--日志信息以流的形式发送到任何指定的地方 
+format: 
+log4j.appender.appenderName=fully.qualified.name.of.appender.class 
+log4j.appender.appenderName.option1=value1 ….. 
+example:  ConsoleAppender FileAppender DBAppender 
+### direct log messages to stdout ### 
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender 
+log4j.appender.stdout.Target=System.out 
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout 
+log4j.appender.stdout.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n 
+### direct log messages to file mip.log ### 
+log4j.appender.file=org.apache.log4j.DailyRollingFileAppender 
+log4j.appender.file.File=../webapps/SgccMsgCenter/log/SgccMsgCenter.log 
+log4j.appender.file.layout=org.apache.log4j.PatternLayout 
+log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %5p %c{1}:%L - %m%n 
+### direct messages to db ### 
+log4j.appender.db=com.ibm.eip.finance.log.DBAppender 
+log4j.appender.db.bufferSize=1 
+
+Layout: org.apache.log4j.HTMLLayout/PatternLayout/SimpleLayout/TTCCLayout 
+pattern的一些配置参数 
+%m 输出代码中指定的消息 
+%p 输出优先级 即debug info warn error 
+%r 输出自应用启动到输出该log信息耗费的毫秒数 
+%c 输出所属的类目 通常是类所在的全名 
+%t 输出产生该日志时间的线程名 
+%n 输出一个回车换行符 win \r\n  unix \n 
+%d 输出日志点的时间格式 
+%l 输出日志事件的发生位置 
+
+关于Log4j的配置一般是在配置文件进行，当然在代码中也可以进行代码级别的配置 
+Logger logger=Logger.getLogger("logger name"); 
+logger.setLevel(Level.INFO); 
+logger.warn("warn information"); 
+// 配置的读取 
+BasicConfigurator.configure();  //使用默认配置 
+PropertyConfigurator.configure(String configureFileName);  // property文件配置 
+or DOMConfigurator.configure(String fileName);   // XML配置 

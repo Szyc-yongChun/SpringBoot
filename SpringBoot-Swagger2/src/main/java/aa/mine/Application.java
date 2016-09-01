@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
 	//TODO http://localhost:8080/swagger-ui.html
+	/**
+	 * 在生产环境，不能提供API文档，最好使用拦截器做过滤
+	 * @param args
+	 */
 	
 	public static void main(String[] args) {
 

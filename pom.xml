@@ -19,5 +19,9 @@
     <module>SpringBoot-Transcation</module>
     <module>SpringBoot-Scheduled</module>
     <module>SpringBoot-Async</module>
+    <module>SpringBoot-Logger</module>
+    <module>SpringBoot-AOP</module>
+    <module>SpringBoot-LogtoMongoDB</module>
+    <module>SpringBoot-SpringSecurity</module>
   </modules>
 </project>

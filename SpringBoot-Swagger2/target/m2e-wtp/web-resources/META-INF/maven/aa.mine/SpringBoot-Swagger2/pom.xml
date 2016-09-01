@@ -26,7 +26,6 @@
 
 	<dependencies>
 		<!-- Spring Boot 核心三个模块 START -->
-
 		<!-- 核心模块，包括自动配置支持、日志和YAML -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

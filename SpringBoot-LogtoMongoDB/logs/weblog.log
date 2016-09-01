@@ -1,0 +1,7 @@
+2016-08-31 11:19:13,706  INFO LoggerAspcet:37 ---- URL : http://127.0.0.1:8080/BBBBBBBBBBB
+2016-08-31 11:19:13,707  INFO LoggerAspcet:38 ---- HTTP_METHOD : GET
+2016-08-31 11:19:13,708  INFO LoggerAspcet:39 ---- IP : 127.0.0.1
+2016-08-31 11:19:13,711  INFO LoggerAspcet:40 ---- CLASS_METHOD : aa.mine.web.HelloAOPController.hello
+2016-08-31 11:19:13,711  INFO LoggerAspcet:42 ---- ARGS : [BBBBBBBBBBB]
+2016-08-31 11:19:13,722  INFO LoggerAspcet:49 ---- RESPONSE : Hello,BBBBBBBBBBB!
+2016-08-31 11:19:13,723  INFO LoggerAspcet:50 ---- SPEND TIME : 17
