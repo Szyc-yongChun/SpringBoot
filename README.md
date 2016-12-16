@@ -212,3 +212,38 @@
 			  由于EhCache是进程内的缓存框架，在集群模式下时，各应用服务器之间的缓存都是独立的，因此在不同服务器的进程间会存在
 	      缓存不一致的情况。在一些要求高一致性（任何数据变化都能及时的被查询到）的系统和应用中，就不能再使用EhCache来解决了，
 		  这个时候使用集中式缓存是个不错的选择。
+
+
+第十九个项目：SpringBoot-WebService  在Spring Boot中整合使用 CXF WebService
+			项目下包含两个子项目，分别是：
+				SpringBoot-WebService-Server
+				SpringBoot-WebService-Client	  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
