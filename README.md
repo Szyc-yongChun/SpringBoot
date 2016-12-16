@@ -1,13 +1,16 @@
+
                             .   ____          _            __ _ _
                            /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
                           ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
                            \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
                             '  |____| .__|_| |_|_| |_\__, | / / / /
                            =========|_|==============|___/=/_/_/_/
-                           :: Spring Boot ::        (v1.3.2.RELEASE)
+                           :: Spring Boot ::        (v1.4.2.RELEASE)
 			   
                                    Spring Boot Learning
-								   
+
+该文档只作项目目录简述，具体笔记存放在子项目下
+运行环境：eclipse、JDK1.8				   
 					   
 第一个项目：SpringBoot-Hello spring boot的入门程序
             
@@ -138,50 +141,55 @@
 第十二个项目：SpringBoot-Logger Spring Boot日志管理
 
 				Spring Boot日志管理
-				         Spring Boot在所有内部日志中使用   Commons Logging，但是默认配置也提供了对常用日志的支持，
-				         如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。
+				    Spring Boot在所有内部日志中使用   Commons Logging，但是默认配置也提供了对常用日志的支持，
+				    如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。
+					
 				Spring boot中使用log4j记录日志
 				        Spring Boot默认的日志框架Logback，在引入log4j之前，需要先排除该包的依赖
+						
 				Spring Boot中对log4j进行多环境不同日志级别的控制
                           ● 创建多环境配置文件
-                            ○ application-dev.properties：开发环境
-                            ○ application-test.properties：测试环境
-                            ○ application-prod.properties：生产环境	
+                          ○ application-dev.properties：开发环境
+                          ○ application-test.properties：测试环境
+                          ○ application-prod.properties：生产环境	
+						  
 
 第十三个项目：SpringBoot-AOP  Spring Boot中使用AOP统一处理Web请求日志
 
-                AOP为Aspect Oriented Programming的缩写，面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。
-				AOP是Spring框架中的一个重要内容，它通过对既有程序定义一个切入点，然后在其前后切入不同的执行内容，
+            AOP为Aspect Oriented Programming的缩写。
+			     面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。
+			  
+			AOP是Spring框架中的一个重要内容，它通过对既有程序定义一个切入点，然后在其前后切入不同的执行内容，
 				比如常见的有：打开数据库连接/关闭数据库连接、打开事务/关闭事务、记录日志等。
 				
-				基于AOP不会破坏原来程序逻辑，因此它可以很好的对业务逻辑的各个部分进行隔离，
+			基于AOP不会破坏原来程序逻辑，因此它可以很好的对业务逻辑的各个部分进行隔离，
 				从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
-
+				
 				
 第十四个项目：SpringBoot-LogtoMongoDB Spring Boot中使用log4j实现http请求日志入mongodb
 
-                思路：log4j提供的输出器实现自Appender接口，要自定义appender输出到MongoDB，只需要继承AppenderSkeleton类，
+              思路：log4j提供的输出器实现自Appender接口，要自定义appender输出到MongoDB，只需要继承AppenderSkeleton类，
 				      并实现几个方法即可完成。
-				该项目主要是提供一个思路去实现自定义日志的输出和管理。我们可以通过jdbc实现日志记录到mongodb，
-				也可以通过spring-data-mongo来记录到mongodb，当然我们也可以输出到其他数据库，或者输出到消息队列等待其他后续处理等。
-                同时对于日志记录到mongodb，也可以直接使用log4mongo（github）实现更为方便快捷。
+			  该项目主要是提供一个思路去实现自定义日志的输出和管理。我们可以通过jdbc实现日志记录到mongodb，
+		  也可以通过spring-data-mongo来记录到mongodb，当然我们也可以输出到其他数据库，或者输出到消息队列等待其他后续处理等。
+          同时对于日志记录到mongodb，也可以直接使用log4mongo（github）实现更为方便快捷。
+		  
 				
 第十五个项目：SpringBoot-SpringSecurity Spring Boot中使用Spring Security进行安全控制
                
-			   Spring Security配置
-			        创建Spring Security的配置类WebSecurityConfig
-					    ● 通过@EnableWebSecurity注解开启Spring Security的功能
-					    ● 继承WebSecurityConfigurerAdapter，并重写它的方法来设置一些web安全的细节
-						● configure(HttpSecurity http)方法
-                        ○ 通过authorizeRequests()定义哪些URL需要被保护、哪些不需要被保护。例如以上代码指定了/和/home不需要
-						任何认证就可以访问，其他的路径都必须通过身份验证。
-                        ○ 通过formLogin()定义当需要用户登录时候，转到的登录页面。
-                        ● configureGlobal(AuthenticationManagerBuilder auth)方法，在内存中创建了一个用户，该用户的名称为user，
-						密码为password，用户角色为USER。
+			Spring Security配置
+			    创建Spring Security的配置类WebSecurityConfig
+				● 通过@EnableWebSecurity注解开启Spring Security的功能
+				● 继承WebSecurityConfigurerAdapter，并重写它的方法来设置一些web安全的细节
+				● configure(HttpSecurity http)方法
+                ○ 通过authorizeRequests()定义哪些URL需要被保护、哪些不需要被保护。例如以上代码指定了/和/home不需要
+					任何认证就可以访问，其他的路径都必须通过身份验证。
+                ○ 通过formLogin()定义当需要用户登录时候，转到的登录页面。
+                ● configureGlobal(AuthenticationManagerBuilder auth)方法，在内存中创建了一个用户，该用户的名称为user，
+				    密码为password，用户角色为USER。
 						
 			   继承WebMvcConfigurerAdapter可以实现配置MVC的很多配置，此处仅配置了拦截器案例。
-
-
+			   
 			   
 第十六个项目：SpringBoot-JavaMailSender  Spring Boot中使用JavaMailSender发送邮件
                 
@@ -190,16 +198,17 @@
 					   发送附件
 					   嵌入静态资源
 					   模板邮件
+					   
 				
 第十七个项目：SpringBoot-EhCache  Spring Boot中的缓存支持（一）注解配置与EhCache使用
  
-              Spring 3开始提供了强大的基于注解的缓存支持，可以通过注解配置方式低侵入的给原有Spring应用增加缓存功能，提高数据访问性能。
+              Spring 3开始提供了强大的基于注解的缓存支持，可以通过注解配置方式低侵入的给原有Spring应用增加缓存功能，
+			          提高数据访问性能。
 			  在Spring Boot中对于缓存的支持，提供了一系列的自动化配置。
 
 
-第十八个项目：SpringBoot-RedisLump  Spring Boot中使用JavaMailSender发送邮件
+第十八个项目：SpringBoot-RedisLump  本项目介绍在Spring Boot的缓存支持中使用Redis进行数据缓存
 			
-			  由于EhCache是进程内的缓存框架，在集群模式下时，各应用服务器之间的缓存都是独立的，因此在不同服务器的进程间会存在缓存不一致的情况。
-			  在一些要求高一致性（任何数据变化都能及时的被查询到）的系统和应用中，就不能再使用EhCache来解决了，这个时候使用集中式缓存是个不错的选择。
-			  
-			  本项目介绍在Spring Boot的缓存支持中使用Redis进行数据缓存
+			  由于EhCache是进程内的缓存框架，在集群模式下时，各应用服务器之间的缓存都是独立的，因此在不同服务器的进程间会存在
+	      缓存不一致的情况。在一些要求高一致性（任何数据变化都能及时的被查询到）的系统和应用中，就不能再使用EhCache来解决了，
+		  这个时候使用集中式缓存是个不错的选择。

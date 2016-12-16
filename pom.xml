@@ -1,30 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>aa.mine</groupId>
-  <artifactId>SpringBoot</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>SpringBoot</name>
-  <description>SpringBoot Learning</description>
-  <modules>
-    <module>SpringBoot-Hello</module>
-    <module>SpringBoot-Swagger2</module>
-    <module>SpringBoot-GlobalException</module>
-    <module>SpringBoot-JdbcTemplate</module>
-    <module>SpringBoot-SpringData</module>
-    <module>SpringBoot-Redis</module>
-    <module>SpringBoot-MongoDB</module>
-    <module>SpringBoot-MyBatis</module>
-    <module>SpringBoot-Transcation</module>
-    <module>SpringBoot-Scheduled</module>
-    <module>SpringBoot-Async</module>
-    <module>SpringBoot-Logger</module>
-    <module>SpringBoot-AOP</module>
-    <module>SpringBoot-LogtoMongoDB</module>
-    <module>SpringBoot-SpringSecurity</module>
-    <module>SpringBoot-JavaMailSender</module>
-    <module>SpringBoot-EhCache</module>
-    <module>SpringBoot-RedisLump</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>aa.mine</groupId>
+	<artifactId>SpringBoot</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>SpringBoot</name>
+	<description>SpringBoot Learning</description>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+	</parent>
+	
+	<modules>
+		<module>SpringBoot-Hello</module>
+		<module>SpringBoot-Swagger2</module>
+		<module>SpringBoot-GlobalException</module>
+		<module>SpringBoot-JdbcTemplate</module>
+		<module>SpringBoot-SpringData</module>
+		<module>SpringBoot-Redis</module>
+		<module>SpringBoot-MongoDB</module>
+		<module>SpringBoot-MyBatis</module>
+		<module>SpringBoot-Transcation</module>
+		<module>SpringBoot-Scheduled</module>
+		<module>SpringBoot-Async</module>
+		<module>SpringBoot-Logger</module>
+		<module>SpringBoot-AOP</module>
+		<module>SpringBoot-LogtoMongoDB</module>
+		<module>SpringBoot-SpringSecurity</module>
+		<module>SpringBoot-JavaMailSender</module>
+		<module>SpringBoot-EhCache</module>
+		<module>SpringBoot-RedisLump</module>
+	</modules>
+
+	<build>
+		<finalName>SpringBoot-Swagger2</finalName>
+		<!-- The Spring Boot Maven plugin provides many convenient features: It 
+			collects all the jars on the classpath and builds a single, runnable "über-jar", 
+			which makes. It more convenient to execute and transport your service. It 
+			searches for the public static void main() method to flag as a runnable class. 
+			It provides a built-in dependency resolver that sets the version number to 
+			match Spring Boot dependencies. You can override any version you wish, but 
+			it will default to Boot’s chosen set of versions. -->
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -11,10 +11,9 @@
 	<url>http://maven.apache.org</url>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.2.RELEASE</version>
-		<relativePath />
+		<groupId>aa.mine</groupId>
+		<artifactId>SpringBoot</artifactId>
+		<version>1.0.0</version>
 	</parent>
 
 	<properties>
@@ -57,15 +56,9 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.16</version>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<finalName>SpringBoot-Transcation</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 </project>

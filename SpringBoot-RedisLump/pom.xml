@@ -12,10 +12,9 @@
 	<description>Redis集中缓存</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.2.RELEASE</version>
-		<relativePath />
+		<groupId>aa.mine</groupId>
+		<artifactId>SpringBoot</artifactId>
+		<version>1.0.0</version>
 	</parent>
 
 	<properties>
@@ -68,14 +67,5 @@
 
 	<build>
 		<finalName>SpringBoot-RedisLump</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 </project>
